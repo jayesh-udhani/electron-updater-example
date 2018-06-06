@@ -65,6 +65,7 @@ function createDefaultWindow() {
     win = null;
   });
   win.loadURL(`file://${__dirname}/version.html#v${app.getVersion()}`);
+
   return win;
 }
 autoUpdater.on('checking-for-update', () => {
@@ -72,6 +73,8 @@ autoUpdater.on('checking-for-update', () => {
 })
 autoUpdater.on('update-available', (info) => {
   sendStatusToWindow('Update available.');
+  let update = confirm("Do you want to update the application");
+  console.log(update);
 })
 autoUpdater.on('update-not-available', (info) => {
   sendStatusToWindow('Update not available.');
@@ -87,6 +90,7 @@ autoUpdater.on('download-progress', (progressObj) => {
 })
 autoUpdater.on('update-downloaded', (info) => {
   sendStatusToWindow('Update downloaded');
+  app.quit();
 });
 app.on('ready', function() {
   // Create the Menu
