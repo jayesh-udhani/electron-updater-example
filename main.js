@@ -69,6 +69,7 @@ function createDefaultWindow() {
   return win;
 }
 autoUpdater.on('checking-for-update', () => {
+  console.log("Checking for update");
   sendStatusToWindow('Checking for update...');
 })
 autoUpdater.on('update-available', (info) => {
@@ -77,6 +78,7 @@ autoUpdater.on('update-available', (info) => {
   console.log(update);
 })
 autoUpdater.on('update-not-available', (info) => {
+  console.log("Update not available");
   sendStatusToWindow('Update not available.');
 })
 autoUpdater.on('error', (err) => {
