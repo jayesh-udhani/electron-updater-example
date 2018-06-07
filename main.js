@@ -1,9 +1,10 @@
 // This is free and unencumbered software released into the public domain.
 // See LICENSE for details
 
-const {app, BrowserWindow, Menu, protocol, ipcMain} = require('electron');
+const {app, BrowserWindow, Menu, protocol, ipcMain, dialog} = require('electron');
 const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
+const version = app.getVersion();
 
 //-------------------------------------------------------------------
 // Logging
@@ -90,10 +91,9 @@ autoUpdater.on('download-progress', (progressObj) => {
   log_message = log_message + ' (' + progressObj.transferred + "/" + progressObj.total + ')';
   sendStatusToWindow(log_message);
 })
-autoUpdater.on('update-downloaded', (info) => {
-  sendStatusToWindow('Update downloaded');
-  app.quit();
-});
+// autoUpdater.on('update-downloaded', (info) => {
+//   sendStatusToWindow('Update downloaded');
+// });
 app.on('ready', function() {
   // Create the Menu
   const menu = Menu.buildFromTemplate(template);
@@ -103,6 +103,29 @@ app.on('ready', function() {
 });
 app.on('window-all-closed', () => {
   app.quit();
+});
+
+autoUpdater.on('update-downloaded', (event, releaseNotes, releaseName) => {
+  let message = app.getName() + ' ' + releaseName + ' is now available. It will be installed the next time you restart the application.';
+  if (releaseNotes) {
+    const splitNotes = releaseNotes.split(/[^\r]\n/);
+    message += '\n\nRelease notes:\n';
+    splitNotes.forEach(notes => {
+      message += notes + '\n\n';
+    });
+  }
+  // Ask user to update the app
+  dialog.showMessageBox({
+    type: 'question',
+    buttons: ['Install and Relaunch', 'Later'],
+    defaultId: 0,
+    message: 'A new version of ' + app.getName() + ' has been downloaded',
+    detail: message
+  }, response => {
+    if (response === 0) {
+      setTimeout(() => autoUpdater.quitAndInstall(), 1);
+    }
+  });
 });
 
 //
