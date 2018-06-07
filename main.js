@@ -74,8 +74,8 @@ autoUpdater.on('checking-for-update', () => {
 })
 autoUpdater.on('update-available', (info) => {
   sendStatusToWindow('Update available.');
-  let update = window.confirm("Do you want to update the application");
-  console.log(update);
+  //let update = window.confirm("Do you want to update the application");
+  //console.log(update);
 })
 autoUpdater.on('update-not-available', (info) => {
   console.log("Update not available");
