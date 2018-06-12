@@ -17,6 +17,7 @@ const version = app.getVersion();
 autoUpdater.logger = log;
 autoUpdater.logger.transports.file.level = 'info';
 log.info('App starting...');
+log.info(version);
 
 //-------------------------------------------------------------------
 // Define the menu
@@ -75,8 +76,6 @@ autoUpdater.on('checking-for-update', () => {
 })
 autoUpdater.on('update-available', (info) => {
   sendStatusToWindow('Update available.');
-  //let update = window.confirm("Do you want to update the application");
-  //console.log(update);
 })
 autoUpdater.on('update-not-available', (info) => {
   console.log("Update not available");
