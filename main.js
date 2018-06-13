@@ -6,6 +6,8 @@ const log = require('electron-log');
 const {autoUpdater} = require("electron-updater");
 const version = app.getVersion();
 
+autoUpdater.autoDownload=false;
+
 //-------------------------------------------------------------------
 // Logging
 //
@@ -76,6 +78,17 @@ autoUpdater.on('checking-for-update', () => {
 })
 autoUpdater.on('update-available', (info) => {
   sendStatusToWindow('Update available.');
+  dialog.showMessageBox({
+    type: 'question',
+    buttons: ['Download update', 'Later'],
+    defaultId: 0,
+    message: 'A new version of ' + app.getName() + ' is available to download. Would you like to download it?',
+    detail: message
+  }, response => {
+    if (response === 0) {
+      setTimeout(() => autoUpdater.downloadUpdate(), 1);
+    }
+  });
 })
 autoUpdater.on('update-not-available', (info) => {
   console.log("Update not available");
