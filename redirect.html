@@ -7,6 +7,7 @@
 <button onclick="myFunction()">Go Back</button>
 <script>
 // Check browser support
+const {app} = require('electron');
 if (typeof(Storage) !== "undefined") {
     document.getElementById("result").innerHTML = localStorage.getItem("firstname");
     document.getElementById("result1").innerHTML = localStorage.getItem("lastname");
@@ -14,7 +15,6 @@ if (typeof(Storage) !== "undefined") {
     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
 }
 function myFunction() {
-    const {app} = require('electron');
 	console.log(__dirname);
 	window.location.assign(`file://${__dirname}/version.html#v${app.getVersion()}`);
 }
