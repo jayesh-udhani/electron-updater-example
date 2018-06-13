@@ -4,6 +4,7 @@
 
 <div id="result"></div>
 <div id="result1"></div>
+<button onclick="myFunction()">Go Back</button>
 <script>
 // Check browser support
 if (typeof(Storage) !== "undefined") {
@@ -11,6 +12,10 @@ if (typeof(Storage) !== "undefined") {
     document.getElementById("result1").innerHTML = localStorage.getItem("lastname");
 } else {
     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+}
+function myFunction() {
+	console.log(__dirname);
+	window.location.assign(`file://${__dirname}/version.html`);
 }
 </script>
 
