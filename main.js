@@ -82,8 +82,8 @@ autoUpdater.on('update-available', (info) => {
     type: 'question',
     buttons: ['Download update', 'Later'],
     defaultId: 0,
-    message: 'A new version of ' + app.getName() + ' is available to download. Would you like to download it?',
-    detail: message
+    message: 'Would you like to download update to this app?',
+    detail: 'A new version of ' + app.getName() + ' is available to download. Would you like to download it?'
   }, response => {
     if (response === 0) {
       setTimeout(() => autoUpdater.downloadUpdate(), 1);
