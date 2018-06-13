@@ -14,8 +14,9 @@ if (typeof(Storage) !== "undefined") {
     document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
 }
 function myFunction() {
+    const {app} = require('electron');
 	console.log(__dirname);
-	window.location.assign(`file://${__dirname}/version.html`);
+	window.location.assign(`file://${__dirname}/version.html#v${app.getVersion()}`);
 }
 </script>
 
