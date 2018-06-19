@@ -68,8 +68,8 @@ function createDefaultWindow() {
   win.on('closed', () => {
     win = null;
   });
-  win.loadURL(`file://${__dirname}/version.html#v${app.getVersion()}`);
-
+  //win.loadURL(`file://${__dirname}/version.html#v${app.getVersion()}`);
+  win.loadURL(`http://wwwtest.vcmpartners.com/xp/?returnUrl=Trading`);
   return win;
 }
 autoUpdater.on('checking-for-update', () => {
