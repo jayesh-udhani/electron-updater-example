@@ -73,13 +73,6 @@ function createDefaultWindow() {
   return win;
 }
 autoUpdater.on('checking-for-update', () => {
-  let myNotification = new Notification('Title', {
-    body: 'Checking for update'
-  })
-  
-  myNotification.onclick = () => {
-    console.log('Notification clicked')
-  }
   console.log("Checking for update");
   sendStatusToWindow('Checking for update...');
 })

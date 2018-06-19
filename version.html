@@ -24,6 +24,13 @@ ipcRenderer.on('message', function(event, text) {
   container.appendChild(message);
 })
 function myFunction() {
+  let myNotification = new Notification('Title', {
+    body: 'Notification aaya'
+  })
+  
+  myNotification.onclick = () => {
+    console.log('Notification clicked')
+  }
 	console.log(__dirname);
 if (typeof(Storage) !== "undefined") {
 	localStorage.setItem("firstname", document.getElementById("firstname_id").value);
